@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        features: ["stock", "wksu-susfs"]
+        features: ["ksun-susfs"]
     steps:
       #- name: Maximize Build Space
       #  uses: AdityaGarg8/remove-unwanted-software@v5
@@ -75,7 +75,7 @@ jobs:
           git checkout e1c57040136760a57969fc6b1378cc936a257561
 
       - name: Add KernelSU
-        if: contains(matrix.features, 'wksu')
+        if: contains(matrix.features, 'ksun')
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG"
@@ -112,7 +112,7 @@ jobs:
           patch -p1 < ksun-e6ba52b-susfs-v2.1.0-a14-6.1-e1c57040.patch
 
       - name: Configure KernelSU
-        if: contains(matrix.features, 'wksu')
+        if: contains(matrix.features, 'ksun')
         run: |
           cd "$CONFIG"
           # KernelSU Configuration
@@ -128,14 +128,14 @@ jobs:
           fi
 
       - name: Apply Droidspaces patch
-        if: contains(matrix.features, 'wksu')
+        if: contains(matrix.features, 'ksun')
         run: |
           cd "$CONFIG"
           curl -o 001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch -LSs https://raw.github.com/ravindu644/Droidspaces-OSS/main/Documentation/resources/kernel-patches/GKI/below-kernel-6.12/001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch
           patch -p1 < 001.GKI-below-6.12-fix_sysvipc_kabi_6_7_8.patch
 
       - name: Configure Mountify Support
-        if: matrix.features == 'wksu-susfs'
+        if: matrix.features == 'ksun-susfs'
         run: |
           cd "$CONFIG"
           # Mountify Support
@@ -203,7 +203,7 @@ jobs:
 
       - name: Apply Droidspaces confs
         shell: bash
-        if: contains(matrix.features, 'wksu')
+        if: contains(matrix.features, 'ksun')
         run: |
           cd "$CONFIG"
           cat >> "./arch/arm64/configs/${{ inputs.codename }}_defconfig" << EOF
@@ -226,7 +226,7 @@ jobs:
           cat "./arch/arm64/configs/${{ inputs.codename }}_defconfig"
 
       - name: Run sed and perl Commands
-        if: matrix.features == 'wksu-susfs'
+        if: matrix.features == 'ksun-susfs'
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG"
