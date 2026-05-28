@@ -26,18 +26,10 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       RELEASE_NAME: "Sultan Kernels With KernelSU Next & SUSFS v2.1.0"
       RELEASE_NOTES: |
-        This release contains KernelSU Next and SUSFS v2.1.0
-        
-        Build should match https://github.com/WildKernels/Sultan_KernelSU_SUSFS/releases/tag/v2.0.0-r12 with added support for droidspaces.
+        This release contains ReSukiSU and SUSFS v2.1.0
 
         **Sultan Commits Used:**
         -> https://github.com/kerneltoast/android_kernel_google_tensynos/commit/TENSYNOS_HASH
-        
-        Module: 
-        -> https://github.com/sidex15/ksu_module_susfs
-        
-        Managers:
-        -> https://github.com/KernelSU-Next/KernelSU-Next
     steps:
       # Checkout the code
       - name: Checkout code
